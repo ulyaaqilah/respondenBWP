@@ -8,6 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    <div class="hero-banner">
+        <img src="{{ asset('images/aquapark_slide.jpg') }}" alt="Selamat Datang di Bugis Water Park">
+    </div>
+    <div class="main-container"></div>
 
     <div class="main-container">
         <div class="summary-wrapper">
