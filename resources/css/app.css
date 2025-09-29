@@ -1,86 +1,315 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+}
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #444;
+}
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #111;
+}
+.star-icon {
+    /* Class untuk semua ikon bintang */
+    color: #ddd; /* Warna default bintang kosong */
+}
+.star-icon.filled {
+    /* Class untuk bintang yang terisi */
+    color: #ffc107;
 }
 
-/* Body */
-body {
-    background: #f4f8fc;
+/* Layout Utama */
+.main-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+.summary-wrapper {
+    display: flex;
+    gap: 30px;
+    background: #fff;
     padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Rating Summary & Progress Bar */
+.rating-summary {
+    flex: 2;
+}
+.summary-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.summary-label {
+    width: 80px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.summary-label .star-icon {
+    font-size: 1em;
+    color: #ffc107;
+}
+.progress-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress {
+    height: 100%;
+    background-color: #ffc107;
+    border-radius: 5px;
+}
+.summary-count {
+    font-weight: bold;
+}
+
+/* Average Rating Box */
+.average-rating {
+    flex: 1;
+    background-color: #fff8e1;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.average-score {
+    font-size: 3rem;
+    font-weight: bold;
     color: #333;
 }
-
-/* Container */
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.average-stars {
+    font-size: 1.5rem;
+    margin: 5px 0;
+}
+.total-ratings {
+    color: #777;
 }
 
-/* Heading */
-h1, h2 {
-    text-align: center;
+/* Form Ulasan */
+.review-form {
+    padding-top: 5px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+.form-group {
     margin-bottom: 20px;
-    color: #0056b3;
 }
-
-/* Input & Textarea */
-input[type="text"], 
-input[type="email"], 
-select, 
+.rating-label {
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+input[type="text"],
+input[type="email"],
 textarea {
     width: 100%;
     padding: 12px;
-    margin: 8px 0 15px 0;
     border: 1px solid #ddd;
     border-radius: 8px;
-    transition: 0.2s;
-}
-
-input:focus, textarea:focus, select:focus {
-    border-color: #0056b3;
-    outline: none;
-}
-
-/* Button */
-button {
-    background: #0056b3;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #003f7f;
-}
-
-/* Success Message */
-.success {
-    text-align: center;
-    color: green;
+    font-size: 1rem;
     margin-bottom: 15px;
 }
-
-/* Review Card */
-.review {
-    background: #f9f9f9;
+button {
+    background-color: #ffc107;
+    color: #111;
+    font-weight: bold;
+    border: none;
     padding: 15px;
-    border-left: 5px solid #0056b3;
-    margin: 10px 0;
     border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #e0a800;
+}
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-.review strong {
-    color: #0056b3;
+/* ===== RATING BINTANG ===== */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating label {
+    font-size: 2rem;
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased; /* Membuat ikon lebih halus */
+    -moz-osx-font-smoothing: grayscale;
+}
+.star-rating label::before {
+    font-family: "FontAwesome";
+    content: "\f005"; /* Kode unicode untuk ikon bintang Font Awesome */
+    display: block;
+    color: #ddd; /* Warna bintang kosong */
+    transition: color 0.2s;
+}
+.star-rating label:hover::before,
+.star-rating label:hover ~ label::before,
+.star-rating input[type="radio"]:checked ~ label::before {
+    color: #ffc107; /* Warna bintang saat hover atau terisi */
+}
+/* ================================================= */
+
+/* Daftar Ulasan (Feedbacks) */
+.feedbacks {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+.review-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+.review-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.review-card-info strong {
+    display: block;
+    margin-bottom: 3px;
+}
+.review-stars {
+    font-size: 0.9rem;
+}
+.no-reviews {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
+
+/* =================================================================== */
+/* ===== Media Queries untuk Tampilan Responsif (Mobile) ===== */
+/* =================================================================== */
+
+/* Terapkan gaya ini jika lebar layar 768px atau kurang */
+@media (max-width: 768px) {
+    /* Kurangi padding utama agar tidak terlalu memakan tempat */
+    .main-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    /* Ubah layout summary dari berdampingan menjadi ke bawah */
+    .summary-wrapper {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* Ubah layout utama dari 2 kolom menjadi 1 kolom */
+    .content-wrapper {
+        grid-template-columns: 1fr; /* Hanya satu kolom */
+        gap: 40px;
+    }
+
+    /* Hapus batas tinggi dan scroll pada daftar feedback */
+    .feedbacks {
+        max-height: none;
+        overflow-y: visible;
+        padding-right: 0;
+    }
+
+    .review-form {
+        order: -1;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .average-score {
+        font-size: 2.5rem;
+    }
+
+    .star-rating label {
+        font-size: 1.8rem;
+    }
+}
+
+/* Styling untuk Tombol Load More */
+.load-more-button {
+    width: 100%;
+    background-color: #fff;
+    color: #111;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.load-more-button:hover {
+    background-color: #f8f9fa;
+}
+
+.load-more-button:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.hero-banner {
+    width: 100%;
+    height: 280px; /* Atur tinggi banner sesuai keinginan */
+    background-color: #f0f0f0; /* Warna fallback jika gambar gagal dimuat */
+    overflow: hidden;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ini penting: gambar akan menutupi area tanpa merusak proporsinya */
+}
+
+/* Penyesuaian untuk mobile */
+@media (max-width: 768px) {
+    .hero-banner {
+        height: 180px; /* Buat banner lebih pendek di HP */
+    }
+
+    .main-container {
+        margin-top: 20px;
+    }
 }
