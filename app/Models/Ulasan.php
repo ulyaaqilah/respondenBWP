@@ -10,6 +10,5 @@ class Ulasan extends Model
     protected $table = 'ulasan';
 
     // kolom yang boleh diisi mass-assignment
-    protected $fillable = ['nama', 'email', 'rating', 'komentar'];
+    protected $fillable = ['nama', 'email', 'rating', 'komentar', 'balasan'];
 }
-

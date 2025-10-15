@@ -8,10 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+
     <div class="hero-banner">
         <img src="{{ asset('images/aquapark_slide.jpg') }}" alt="Selamat Datang di Bugis Water Park">
     </div>
-    <div class="main-container"></div>
 
     <div class="main-container">
         <div class="summary-wrapper">
@@ -58,6 +58,14 @@
                                 </div>
                             </div>
                             <p>{{ $u->komentar }}</p>
+
+                            @if($u->balasan)
+                                <div class="admin-reply">
+                                    <strong>Balasan Admin:</strong>
+                                    <p>{{ $u->balasan }}</p>
+                                </div>
+                            @endif
+
                         </div>
                     @empty
                         <p class="no-reviews">Belum ada ulasan. Jadilah yang pertama!</p>

@@ -1,6 +1,7 @@
 import "./bootstrap";
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Fungsi untuk pesan sukses
     const successAlert = document.querySelector(".success-message");
     if (successAlert) {
         setTimeout(() => {
@@ -10,9 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
     }
 
+    // Logika untuk Load More
     const loadMoreBtn = document.getElementById("load-more-btn");
     const feedbackList = document.getElementById("feedback-list");
-    let skip = 3;
+    let skip = 3; // Mulai dengan melewati 3 ulasan pertama
 
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener("click", async function () {
@@ -53,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // PERUBAHAN UTAMA ADA DI FUNGSI INI
     function createReviewCard(ulasan) {
         let stars = "";
         for (let i = 1; i <= 5; i++) {
@@ -62,6 +65,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const encodedName = encodeURIComponent(ulasan.nama);
+
+        // Variabel untuk menampung HTML balasan (jika ada)
+        let adminReplyHtml = "";
+        if (ulasan.balasan) {
+            adminReplyHtml = `
+                <div class="admin-reply">
+                    <strong>Balasan Admin:</strong>
+                    <p>${ulasan.balasan}</p>
+                </div>
+            `;
+        }
 
         return `
             <div class="review-card">
@@ -75,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
                 <p>${ulasan.komentar}</p>
-            </div>
+                ${adminReplyHtml} </div>
         `;
     }
 });
