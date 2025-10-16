@@ -9,9 +9,9 @@
 </head>
 <body>
 
-    <div class="hero-banner">
+    {{-- <div class="hero-banner">
         <img src="{{ asset('images/aquapark_slide.jpg') }}" alt="Selamat Datang di Bugis Water Park">
-    </div>
+    </div> --}}
 
     <div class="main-container">
         <div class="summary-wrapper">
